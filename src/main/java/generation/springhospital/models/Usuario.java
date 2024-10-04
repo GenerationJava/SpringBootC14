@@ -3,6 +3,7 @@ package generation.springhospital.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,11 +12,22 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "usuarios")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
+    private String nombre;
+
+    private String apellido;
+
 
     @Column(nullable = false, unique = true)//Restricciones para la columna, no permitir null y sólo registros únicos
     private String email;
@@ -46,60 +58,5 @@ public class Usuario {
 
 
     /*****************************************/
-    public Usuario() {
-    }
 
-    public Usuario(String email, String password, TipoUsuario tipoUsuario) {
-        this.email = email;
-        this.password = password;
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", tipoUsuario=" + tipoUsuario +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }

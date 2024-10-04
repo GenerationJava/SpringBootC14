@@ -15,7 +15,7 @@ public class DoctorController {
     private DoctorServiceImpl doctorServiceImpl;
 
     //Método GET para mostrar una vista llamada indexdoctores al ingresar a la ruta "localhost:8080/doctor/index"
-    @GetMapping
+    @GetMapping("/lista")
     public String indexDoctores() {
         return "indexdoctores.html";
     }
