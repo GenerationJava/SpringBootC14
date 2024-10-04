@@ -17,7 +17,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Doctor findById(Long id) {
         //Llama al repository y al método para buscar por ID
-        return doctorRepository.getReferenceById(id);
+        return doctorRepository.findById(id).get();
     }
 
     @Transactional

@@ -9,5 +9,4 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     //Los repositorios son interfaces porque sólo definen métodos
     /**La clase JpaRepository, contiene métodos para hacer el CRUD**/
 
-
 }
