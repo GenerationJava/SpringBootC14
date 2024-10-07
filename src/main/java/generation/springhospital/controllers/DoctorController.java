@@ -17,7 +17,7 @@ public class DoctorController {
     //Método GET para mostrar una vista llamada indexdoctores al ingresar a la ruta "localhost:8080/doctor/index"
     @GetMapping("/lista")
     public String indexDoctores() {
-        return "indexdoctores.html";
+        return "lista-doctores.html";
     }
 
 

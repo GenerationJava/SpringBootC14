@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Doctores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <h1 class="text-center my-4">Lista de Doctores</h1>
+
+    <div th:if="${not #lists.isEmpty(doctores)}">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Años de Experiencia</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterar sobre la lista de doctores y mostrar sus datos -->
+            <tr th:each="doctor : ${doctores}">
+                <td th:text="${doctor.usuario.nombre}">Nombre del Doctor</td>
+                <td th:text="${doctor.usuario.email}">Email del Doctor</td>
+                <td th:text="${doctor.añosExperiencia}">Años de Experiencia</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mensaje de información si la lista está vacía -->
+    <div th:if="${#lists.isEmpty(doctores)}" class="alert alert-info text-center">
+        No hay doctores registrados.
+    </div>
+
+
+    <div class="text-center mt-4">
+        <a href="/usuario/menu" class="btn btn-primary">Volver al Menú Principal</a>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

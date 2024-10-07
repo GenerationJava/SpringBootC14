@@ -34,7 +34,16 @@ public class UsuarioController {
     @PostMapping("/crear")
     public String guardarUsuarioCreado(@ModelAttribute Usuario usuarioNuevo, Model model) {
         usuarioService.saveUsuario(usuarioNuevo);
-        return "redirect:/usuario/menu";
+
+        // redirigir al formulario adecuado
+        if (usuarioNuevo.getTipoUsuario() == TipoUsuario.DOCTOR) {
+            return "redirect:/doctores/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear doctor
+        } else if (usuarioNuevo.getTipoUsuario() == TipoUsuario.PACIENTE) {
+            return "redirect:/pacientes/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear paciente
+        }
+
+
+        return "registro-usuario";
     }
 
 }
