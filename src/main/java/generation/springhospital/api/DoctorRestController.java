@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/doctores")
 public class DoctorRestController {
 
     @Autowired
@@ -21,5 +21,6 @@ public class DoctorRestController {
         System.out.println(doctorSeleccionado.getEspecialidad());
         return doctorSeleccionado;
     }
+
 
 }
