@@ -6,10 +6,13 @@ import generation.springhospital.services.DoctorService;
 import generation.springhospital.services.DoctorServiceImpl;
 import generation.springhospital.services.HorarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -101,8 +104,11 @@ public class HorarioRestController {
 
     /** GENERAR INTÉRVALOS DE UNA HORA A PARTIR DEL ID DEL DOCTOR Y FECHA DEL HORARIO CREADO **/
     @GetMapping("/disponibilidad/{doctorId}")
-    public ResponseEntity<List<Horario>> findHorariosByDoctorId(@PathVariable Long doctorId) {
-        return new ResponseEntity<>(horarioService.findByDoctorId(doctorId), HttpStatus.OK);
+    public ResponseEntity<List<LocalTime>> findIntervalosByDoctorIdAndFecha(@PathVariable Long doctorId,
+                                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha) {
+        //Creamos una variable para almacenar la lista
+        List<LocalTime> intervalosDisponibles = horarioService.obtenerIntervalosDeUnaHora(doctorId, fecha);
+        return new ResponseEntity<>(intervalosDisponibles, HttpStatus.OK);
     }
 
 }

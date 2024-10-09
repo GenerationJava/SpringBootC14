@@ -46,7 +46,7 @@ public class HorarioService {
 
     //Método para generar intervalos de una hora a partir de un horario
     public List<LocalTime> obtenerIntervalosDeUnaHora(Long doctorId, LocalDate fecha) {
-        //Horarios creados los guardamos en una variable
+        //Horario creado lo guardamos en una variable
         Horario horario = horarioRepository.findByDoctorIdAndFecha(doctorId, fecha);
 
         if (horario == null) {
@@ -61,11 +61,11 @@ public class HorarioService {
 
 
     //Método para obtener la lista de intervalos disponibles
-    public List<LocalTime> generarIntervalos(LocalTime horaInicio, LocalTime horaFin) {
-        //Generamos una variable que es una lista de Horarios vacía
+    private List<LocalTime> generarIntervalos(LocalTime horaInicio, LocalTime horaFin) {
+        //Generamos una variable como una lista de Horarios vacía
         List<LocalTime> intervalos = new ArrayList<>();
 
-        //Generamos una variable que es la hora de inicio para el bucle
+        //Generamos una variable que toma como referencia la hora de inicio, para el bucle
         LocalTime horaActual = horaInicio;
 
         //Generamos un bucle que toma la hora de inicio y la compara con la hora final
@@ -81,9 +81,8 @@ public class HorarioService {
     }
 
 
-
     //Método para validar que una cita pueda ser agendada dentro de un horario
-    
+
 
 
 
