@@ -38,6 +38,16 @@ public class HorarioService {
         return horarioRepository.findByEstado(estado);
     }
 
+    //Método para generar intervalos de una hora a partir de un horario
+
+
+
+    //Método para obtener la lista de intervalos disponibles
+
+
+
+    //Método para validar que una cita pueda ser agendada dentro de un horario
+
 
 
 }

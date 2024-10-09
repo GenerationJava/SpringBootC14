@@ -8,13 +8,13 @@
 <body class="bg-light">
 <div class="container">
   <h1 class="text-center my-4">Crear Doctor</h1>
-  <form th:action="@{/doctores/crear}" th:object="${doctor}" method="post" class="w-50 mx-auto border p-4 rounded shadow-sm bg-white">
+  <form th:action="@{/doctor/crear}" th:object="${doctor}" method="post" class="w-50 mx-auto border p-4 rounded shadow-sm bg-white">
     <!-- Campo oculto para el ID del usuario -->
     <input type="hidden" th:field="*{usuario.id}" />
 
     <div class="mb-3">
       <label for="especialidad" class="form-label">Especialidad:</label>
-      <input type="number" id="especialidad" th:field="*{especialidad}" class="form-control" required/>
+      <input type="text" id="especialidad" th:field="*{especialidad}" class="form-control" required/>
     </div>
 
     <div class="text-center">

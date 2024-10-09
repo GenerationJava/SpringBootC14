@@ -8,7 +8,7 @@
 <body class="bg-light">
 <div class="container">
   <h1 class="text-center my-4">Crear Paciente</h1>
-  <form th:action="@{/pacientes/crear}" th:object="${paciente}" method="post" class="w-50 mx-auto border p-4 rounded shadow-sm bg-white">
+  <form th:action="@{/paciente/crear}" th:object="${paciente}" method="post" class="w-50 mx-auto border p-4 rounded shadow-sm bg-white">
     <!-- campo oculto para el ID del usuario -->
     <input type="hidden" th:field="*{usuario.id}" />
 

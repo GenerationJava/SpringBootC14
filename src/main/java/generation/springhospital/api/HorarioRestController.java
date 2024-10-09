@@ -16,12 +16,14 @@ import java.util.List;
 @RequestMapping("/api/horarios")
 public class HorarioRestController {
 
+    /** INYECCIÓN DE DEPENDENCIAS **/
     @Autowired
     private HorarioService horarioService;
 
     @Autowired
     private DoctorServiceImpl doctorService;
 
+    /** OBTENER LISTA DE TODOS LOS HORARIOS CREADOS **/
     //Clase ResponseEntity<List<Horario>> permite manipular el status de la respuesta
     @GetMapping("/lista")
     public ResponseEntity<List<Horario>> findAllHorario() {
@@ -31,20 +33,23 @@ public class HorarioRestController {
         return new ResponseEntity<>(listaHorarios, HttpStatus.OK);
     }
 
-
+    /** OBTENER HORARIO POR ID **/
     //Al no conocer el tipo de dato que se va a retornar podemos indicar que se retorna un responseEntity<?>
+    //@PathVariable = localhost/api/horarios/5
     @GetMapping("/{id}")
     public ResponseEntity<?> findHorarioById(@PathVariable Long id) {
         return new ResponseEntity<>(horarioService.findById(id), HttpStatus.OK);
     }
-    //PathVariable = localhost/api/horarios/5
 
+
+    /** OBTENER HORARIOS POR ESTADO **/
     @GetMapping
     public ResponseEntity<?> findHorarioByEstado(@RequestParam String estado) {
         return new ResponseEntity<>(horarioService.findHorarioByEstado(estado), HttpStatus.OK);
     }
     //RequestParam = localhost/api/horarios?estado=DISPONIBLE
 
+    /** CREAR NUEVO HORARIO PARA DOCTOR CON EL ID DE DOCTOR **/
     @PostMapping("/nuevo/{doctorId}")
     public ResponseEntity<?> saveHorarioNuevo(@RequestBody Horario horarioNuevo,
                                               @PathVariable Long doctorId) {
@@ -59,11 +64,14 @@ public class HorarioRestController {
         return new ResponseEntity<>("El horario se ha creado exitosamente", HttpStatus.CREATED);
     }
 
+    /** EDITAR HORARIO POR ID **/
 
 
 
+    /** ELIMINAR HORARIO POR ID **/
 
 
 
+    /** GENERAR INTÉRVALOS DE UNA HORA A PARTIR DEL ID DEL DOCTOR Y FECHA DEL HORARIO CREADO **/
 
 }
