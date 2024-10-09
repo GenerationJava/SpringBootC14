@@ -65,10 +65,37 @@ public class HorarioRestController {
     }
 
     /** EDITAR HORARIO POR ID **/
+    //PUT es el método HTTP para trabajar con edición
+    //ID del horario va a ser la variable o criterio de búsqueda del horario a editar
+    //Va a recibir un objeto de tipo Horario con los campos editados
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Horario> updateHorarioById(@PathVariable Long id,
+                                                     @RequestBody Horario horarioEditado) {
+        //Buscamos primero, el horario por ID
+        Horario horarioSeleccionado = horarioService.findById(id);
 
+        //Al horarioEditado que viene en el cuerpo de la petición, le seteamos el ID de nuestro horarioSeleccionado
+        horarioEditado.setId(horarioSeleccionado.getId());
+
+        //Al horarioeEditado le seteamos el doctor del horarioSeleccionado
+        horarioEditado.setDoctor(horarioSeleccionado.getDoctor());
+
+        //Retornamos una nueva ResponseEntity pasando como argumento el método de guardar horario
+        return new ResponseEntity<>(horarioService.saveHorario(horarioEditado), HttpStatus.OK);
+    }
 
 
     /** ELIMINAR HORARIO POR ID **/
+    //DELETE es el método HTTP que me permite eliminar registros
+    //ID del horario va a ser el atributo por el que voy a filtrar
+    //Vamos a recibir un dato de tipo Long que es el ID a través de la ruta
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<String> deleteHorarioById(@PathVariable Long id) {
+        //LLamamos al método del service para borrar por ID
+        horarioService.deleteHorarioById(id);
+        //Retornamos un nuevo ResponseEntity indicando un mensaje en el cuerpo de la respuesta
+        return new ResponseEntity<>("El horario ha sido eliminado", HttpStatus.OK);
+    }
 
 
 

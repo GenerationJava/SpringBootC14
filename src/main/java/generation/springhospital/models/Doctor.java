@@ -2,6 +2,10 @@ package generation.springhospital.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,6 +14,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "doctores")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Doctor {
 
     @Id
@@ -43,6 +51,8 @@ public class Doctor {
     private List<Especialidad> especialidades;
 
     /***********************************************************/
+
+    /*
     public Doctor() {
     }
 
@@ -88,5 +98,5 @@ public class Doctor {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
-    }
+    }*/
 }

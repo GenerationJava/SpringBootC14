@@ -15,7 +15,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Email</th>
-                <th>Años de Experiencia</th>
+                <th>Especialidad</th>
             </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
             <tr th:each="doctor : ${doctores}">
                 <td th:text="${doctor.usuario.nombre}">Nombre del Doctor</td>
                 <td th:text="${doctor.usuario.email}">Email del Doctor</td>
-                <td th:text="${doctor.añosExperiencia}">Años de Experiencia</td>
+                <td th:text="${doctor.especialidad}">Especialidad</td>
             </tr>
             </tbody>
         </table>

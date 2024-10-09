@@ -1,6 +1,7 @@
 package generation.springhospital.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -47,6 +48,7 @@ public class Horario {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @JsonIgnore//Ignorar en la respuesta JSON este campo
     @ManyToOne//Many to one permite crear una relación de uno a muchos (1 a n)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;

@@ -37,9 +37,9 @@ public class UsuarioController {
 
         // redirigir al formulario adecuado
         if (usuarioNuevo.getTipoUsuario() == TipoUsuario.DOCTOR) {
-            return "redirect:/doctores/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear doctor
+            return "redirect:/doctor/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear doctor
         } else if (usuarioNuevo.getTipoUsuario() == TipoUsuario.PACIENTE) {
-            return "redirect:/pacientes/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear paciente
+            return "redirect:/paciente/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear paciente
         }
 
 
