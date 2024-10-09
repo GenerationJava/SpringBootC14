@@ -100,5 +100,9 @@ public class HorarioRestController {
 
 
     /** GENERAR INTÉRVALOS DE UNA HORA A PARTIR DEL ID DEL DOCTOR Y FECHA DEL HORARIO CREADO **/
+    @GetMapping("/disponibilidad/{doctorId}")
+    public ResponseEntity<List<Horario>> findHorariosByDoctorId(@PathVariable Long doctorId) {
+        return new ResponseEntity<>(horarioService.findByDoctorId(doctorId), HttpStatus.OK);
+    }
 
 }
