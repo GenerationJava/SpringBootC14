@@ -81,8 +81,13 @@ public class HorarioService {
     }
 
 
-    //Método para validar que una cita pueda ser agendada dentro de un horario
-
+    //Método para validar que una cita pueda ser agendada dentro de un horario y con el mismo doctor
+    public boolean validarCitaDentroDelHorario(Long doctorId, LocalDate fecha, LocalTime hora) {
+        //Obtenemos los intervalos de una hora para el día en que se va a agendar
+        List<LocalTime> intervalosDisponibles = obtenerIntervalosDeUnaHora(doctorId, fecha);
+        //Retornamos un bolean si es que la hora está contenida en el intervalo
+        return intervalosDisponibles.contains(hora);
+    }
 
 
 

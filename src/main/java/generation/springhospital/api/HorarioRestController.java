@@ -108,6 +108,7 @@ public class HorarioRestController {
                                                                           @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha) {
         //Creamos una variable para almacenar la lista
         List<LocalTime> intervalosDisponibles = horarioService.obtenerIntervalosDeUnaHora(doctorId, fecha);
+
         return new ResponseEntity<>(intervalosDisponibles, HttpStatus.OK);
     }
 
