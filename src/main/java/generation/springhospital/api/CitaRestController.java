@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -30,15 +31,17 @@ public class CitaRestController {
     @PostMapping("/{doctorId}/{pacienteId}")
     public ResponseEntity<Cita> agendarCita(@PathVariable Long doctorId,
                                             @PathVariable Long pacienteId,
-                                            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate fecha,
-                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora) {
+                                            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha,
+                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora ) {
 
         //Creacion de las notificaciones para doctor y paciente
 
         //Llamado al servicio de envío de mail
 
         return new ResponseEntity<>(citaService.agendarCita(doctorId, pacienteId, fecha, hora), HttpStatus.OK);
+
     }
+
 
 
 

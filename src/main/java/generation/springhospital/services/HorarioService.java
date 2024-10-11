@@ -19,6 +19,7 @@ public class HorarioService {
     @Autowired
     private DoctorServiceImpl doctorService;
 
+
     //Método para buscar horario por id
     public Horario findById(Long id) {
         return horarioRepository.findById(id).get();
