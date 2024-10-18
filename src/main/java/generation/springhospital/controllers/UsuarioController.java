@@ -3,7 +3,7 @@ package generation.springhospital.controllers;
 
 import generation.springhospital.models.TipoUsuario;
 import generation.springhospital.models.Usuario;
-import generation.springhospital.services.UsuarioService;
+import generation.springhospital.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/menu")
     public String mostrarMenu() {
@@ -36,9 +36,9 @@ public class UsuarioController {
         usuarioService.saveUsuario(usuarioNuevo);
 
         // redirigir al formulario adecuado
-        if (usuarioNuevo.getTipoUsuario() == TipoUsuario.DOCTOR) {
+        if (usuarioNuevo.getTipo() == TipoUsuario.DOCTOR) {
             return "redirect:/doctor/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear doctor
-        } else if (usuarioNuevo.getTipoUsuario() == TipoUsuario.PACIENTE) {
+        } else if (usuarioNuevo.getTipo() == TipoUsuario.PACIENTE) {
             return "redirect:/paciente/crear?usuarioId=" + usuarioNuevo.getId(); // Redirige a crear paciente
         }
 

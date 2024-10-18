@@ -8,17 +8,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "pacientes")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Paciente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@DiscriminatorValue("PACIENTE")
+public class Paciente extends Usuario {
 
     private String motivoConsulta;
 

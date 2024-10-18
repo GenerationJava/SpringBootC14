@@ -1,11 +1,7 @@
 package generation.springhospital.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,18 +9,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "doctores")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Doctor {
+@ToString
+@DiscriminatorValue("DOCTOR")
+public class Doctor extends Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false)
     private String especialidad;
 
     private Boolean atencionOnline;

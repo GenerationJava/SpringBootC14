@@ -1,22 +1,13 @@
 package generation.springhospital.services;
 
 import generation.springhospital.models.Usuario;
-import generation.springhospital.repositories.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UsuarioService {
+public interface UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    Usuario findById(Long id);
 
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id).get();
-    }
+    Usuario saveUsuario(Usuario usuarioNuevo);
 
-    public Usuario saveUsuario(Usuario usuarioNuevo) {
-        return usuarioRepository.save(usuarioNuevo);
-    }
+    Boolean existsUsuarioByEmail(String email);
 
 }

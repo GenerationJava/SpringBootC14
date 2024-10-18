@@ -1,14 +1,14 @@
 package generation.springhospital.api;
 
 import generation.springhospital.models.Cita;
-import generation.springhospital.services.CitaService;
+import generation.springhospital.services.CitaServiceImpl;
+import generation.springhospital.services.NotificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -17,11 +17,12 @@ import java.time.LocalTime;
 @RequestMapping("/api/citas")
 public class CitaRestController {
 
-
-
     /** INYECCIÓN DE DEPENDENCIAS **/
     @Autowired
-    private CitaService citaService;
+    private CitaServiceImpl citaService;
+
+    @Autowired
+    private NotificacionService notificacionService;
 
 
 
@@ -34,9 +35,21 @@ public class CitaRestController {
                                             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha,
                                             @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora ) {
 
-        //Creacion de las notificaciones para doctor y paciente
-
         //Llamado al servicio de envío de mail
+        Cita nuevaCita = citaService.agendarCita(doctorId, pacienteId, fecha, hora);
+
+
+        //Creacion de las notificaciones para doctor y paciente
+        notificacionService.crearNotificacion(
+                nuevaCita.getPaciente(), "Tu cita ha sido agendada para el " +
+                        nuevaCita.getFecha() + " a las " + nuevaCita.getHora());
+
+        notificacionService.crearNotificacion((
+                nuevaCita.getDoctor()), "Tienes una nueva cita con " +
+                nuevaCita.getPaciente().getNombre() + " el " + nuevaCita.getFecha() + " a las " +
+                nuevaCita.getHora());
+
+
 
         return new ResponseEntity<>(citaService.agendarCita(doctorId, pacienteId, fecha, hora), HttpStatus.OK);
 

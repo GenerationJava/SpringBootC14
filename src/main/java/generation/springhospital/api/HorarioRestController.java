@@ -2,9 +2,8 @@ package generation.springhospital.api;
 
 import generation.springhospital.models.Doctor;
 import generation.springhospital.models.Horario;
-import generation.springhospital.services.DoctorService;
 import generation.springhospital.services.DoctorServiceImpl;
-import generation.springhospital.services.HorarioService;
+import generation.springhospital.services.HorarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class HorarioRestController {
 
     /** INYECCIÓN DE DEPENDENCIAS **/
     @Autowired
-    private HorarioService horarioService;
+    private HorarioServiceImpl horarioServiceImpl;
 
     @Autowired
     private DoctorServiceImpl doctorService;
@@ -30,7 +29,7 @@ public class HorarioRestController {
     //Clase ResponseEntity<List<Horario>> permite manipular el status de la respuesta
     @GetMapping("/lista")
     public ResponseEntity<List<Horario>> findAllHorario() {
-        List<Horario> listaHorarios = horarioService.findAll();
+        List<Horario> listaHorarios = horarioServiceImpl.findAll();
         //Retornamos una nueva instancia de ResponseEntity
         //return new ResponseEntity<>(horarioService.findAll(), HttpStatus.OK)
         return new ResponseEntity<>(listaHorarios, HttpStatus.OK);
@@ -41,14 +40,14 @@ public class HorarioRestController {
     //@PathVariable = localhost/api/horarios/5
     @GetMapping("/{id}")
     public ResponseEntity<?> findHorarioById(@PathVariable Long id) {
-        return new ResponseEntity<>(horarioService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(horarioServiceImpl.findById(id), HttpStatus.OK);
     }
 
 
     /** OBTENER HORARIOS POR ESTADO **/
     @GetMapping
     public ResponseEntity<?> findHorarioByEstado(@RequestParam String estado) {
-        return new ResponseEntity<>(horarioService.findHorarioByEstado(estado), HttpStatus.OK);
+        return new ResponseEntity<>(horarioServiceImpl.findHorarioByEstado(estado), HttpStatus.OK);
     }
     //RequestParam = localhost/api/horarios?estado=DISPONIBLE
 
@@ -63,7 +62,7 @@ public class HorarioRestController {
         horarioNuevo.setDoctor(doctorSeleccionado);
 
         //Finalmente, guardamos el horario llamando al método en el service
-        horarioService.saveHorario(horarioNuevo);
+        horarioServiceImpl.saveHorario(horarioNuevo);
         return new ResponseEntity<>("El horario se ha creado exitosamente", HttpStatus.CREATED);
     }
 
@@ -75,7 +74,7 @@ public class HorarioRestController {
     public ResponseEntity<Horario> updateHorarioById(@PathVariable Long id,
                                                      @RequestBody Horario horarioEditado) {
         //Buscamos primero, el horario por ID
-        Horario horarioSeleccionado = horarioService.findById(id);
+        Horario horarioSeleccionado = horarioServiceImpl.findById(id);
 
         //Al horarioEditado que viene en el cuerpo de la petición, le seteamos el ID de nuestro horarioSeleccionado
         horarioEditado.setId(horarioSeleccionado.getId());
@@ -84,7 +83,7 @@ public class HorarioRestController {
         horarioEditado.setDoctor(horarioSeleccionado.getDoctor());
 
         //Retornamos una nueva ResponseEntity pasando como argumento el método de guardar horario
-        return new ResponseEntity<>(horarioService.saveHorario(horarioEditado), HttpStatus.OK);
+        return new ResponseEntity<>(horarioServiceImpl.saveHorario(horarioEditado), HttpStatus.OK);
     }
 
 
@@ -95,7 +94,7 @@ public class HorarioRestController {
     @DeleteMapping("/borrar/{id}")
     public ResponseEntity<String> deleteHorarioById(@PathVariable Long id) {
         //LLamamos al método del service para borrar por ID
-        horarioService.deleteHorarioById(id);
+        horarioServiceImpl.deleteHorarioById(id);
         //Retornamos un nuevo ResponseEntity indicando un mensaje en el cuerpo de la respuesta
         return new ResponseEntity<>("El horario ha sido eliminado", HttpStatus.OK);
     }
@@ -107,7 +106,7 @@ public class HorarioRestController {
     public ResponseEntity<List<LocalTime>> findIntervalosByDoctorIdAndFecha(@PathVariable Long doctorId,
                                                                           @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha) {
         //Creamos una variable para almacenar la lista
-        List<LocalTime> intervalosDisponibles = horarioService.obtenerIntervalosDeUnaHora(doctorId, fecha);
+        List<LocalTime> intervalosDisponibles = horarioServiceImpl.obtenerIntervalosDeUnaHora(doctorId, fecha);
 
         return new ResponseEntity<>(intervalosDisponibles, HttpStatus.OK);
     }

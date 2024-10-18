@@ -2,8 +2,8 @@ package generation.springhospital.controllers;
 
 import generation.springhospital.models.Paciente;
 import generation.springhospital.models.Usuario;
-import generation.springhospital.services.PacienteService;
-import generation.springhospital.services.UsuarioService;
+import generation.springhospital.services.PacienteServiceImpl;
+import generation.springhospital.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +16,16 @@ import java.util.List;
 public class PacienteController {
 
     @Autowired
-    private PacienteService pacienteService;
+    private PacienteServiceImpl pacienteServiceImpl;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/lista")
     public String listarPacientes(Model model) {
-        List<Paciente> pacientes = pacienteService.findAllPaciente();
+        List<Paciente> pacientes = pacienteServiceImpl.findAllPaciente();
         model.addAttribute("pacientes", pacientes);
-        System.out.println(pacienteService.findAllPaciente());
+        System.out.println(pacienteServiceImpl.findAllPaciente());
         return "lista-pacientes";
     }
 
@@ -44,7 +44,7 @@ public class PacienteController {
 
     @PostMapping("/crear")
     public String guardarDoctorCreado(@ModelAttribute Paciente paciente){  // al recibir atributos se usa el @ModelAttribute
-        pacienteService.savePaciente(paciente);
+        pacienteServiceImpl.savePaciente(paciente);
         return "redirect:/paciente/lista";
     }
 

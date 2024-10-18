@@ -1,10 +1,9 @@
 package generation.springhospital.controllers;
 
 import generation.springhospital.models.Doctor;
-import generation.springhospital.models.Paciente;
 import generation.springhospital.models.Usuario;
 import generation.springhospital.services.DoctorServiceImpl;
-import generation.springhospital.services.UsuarioService;
+import generation.springhospital.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,7 @@ public class DoctorController {
     private DoctorServiceImpl doctorServiceImpl;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImpl usuarioService;
 
     //Método GET para mostrar una vista llamada indexdoctores al ingresar a la ruta "localhost:8080/doctor/index"
     @GetMapping("/lista")

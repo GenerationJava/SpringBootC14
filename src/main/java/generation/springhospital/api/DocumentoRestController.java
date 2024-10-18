@@ -1,7 +1,7 @@
 package generation.springhospital.api;
 
-import hospital.spring.model.Documento;
-import hospital.spring.services.GoogleCloudStorageService;
+import generation.springhospital.models.Documento;
+import generation.springhospital.storage.GoogleCloudStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

@@ -1,17 +1,15 @@
 package generation.springhospital.services;
 
-//Anotaciones
-public class NotificacionService {
+import generation.springhospital.models.Notificacion;
+import generation.springhospital.models.Usuario;
 
-    //Inyección de dependencias
+import java.util.List;
 
+public interface NotificacionService {
 
-    //Método para crear notificación
+    Notificacion crearNotificacion(Usuario usuario, String mensaje);
 
+    List<Notificacion> obtenerNotificacionesPorUsuario(Long usuarioId);
 
-    //Método para obtener notificaciones por ID de usuario
-
-
-    //Método para marcar notificación como leída
-
+    void marcarComoLeida(Long notificacionId);
 }
